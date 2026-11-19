@@ -89,6 +89,20 @@ Serves static files from Pages (and `/data/orbits.json` in the fallback path). C
 `VITE_ORBITS_URL` (default CelesTrak; fallback `./data/orbits.json`), `VITE_COUNTER_URL`
 (empty = off), `VITE_COUNTER_KIND` (`goatcounter|umami`). See `.env.example`. No secrets.
 
+## Stack and dependencies
+
+TypeScript (strict); Node: the current active LTS, exact version in `.nvmrc` and `engines`; npm
+with a committed `package-lock.json`; exact versions. Runtime: React; to be added with the first
+feature: `satellite.js@7.2.0` (MIT) and `astronomy-engine` (Sun, twilight, sidereal time; check
+its license when installing). Dev: Vite, Vitest, Biome, Playwright, tsx.
+
+## Running locally
+
+`npm ci`, then `npm run dev` (orbits from CelesTrak through the cache, or
+`VITE_ORBITS_URL=/fixtures/orbits.json`). Night report (planned):
+`npm run night-report -- --lat … --lon … --night YYYY-MM-DD --out <folder outside the repo>`.
+The fallback data workflow, if needed, runs on cron `17 */6 * * *` plus `workflow_dispatch`.
+
 ## Tooling
 
 Biome (format, lint); `tsc` over `tsconfig.core.json`, `tsconfig.app.json` and
